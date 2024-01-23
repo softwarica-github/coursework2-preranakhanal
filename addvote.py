@@ -8,6 +8,74 @@ import json
 from tkinter import Button
 
 
+def data_not_found():
+    '''Store title for toplevel in title and message to be displayed at message and calls show_error function providing title and message'''
+    title = "Username Not Found"
+    message = "Input Username was\n not Found"
+    from errors import error as show_error
+
+    show_error(title, message)
+
+def candidate_selected(candidate_name):
+    
+    image_path = "images/profileimg.png"
+    decoded_data = lsb.reveal(image_path)
+    decoded_data = json.loads(decoded_data)
+
+    # Created candidatelist as blank list
+    detailedlist = decoded_data['Candidate']
+
+    for candidates in detailedlist:
+        if candidates[0] == candidate_name:
+            candidates[1] = candidates[1] + 1
+            str(candidates[1])
+        
+        decoded_data['Candidate'] = detailedlist
+        json_data = json.dumps(decoded_data)
+        # Encode the JSON data into the image using least significant bit (LSB) method
+        encoded_image = lsb.hide(image_path, json_data)
+        # Save the output image
+        encoded_image.save(image_path)
+
+   
+def confirm_votes(WIN,name):
+    WIN_top = Toplevel(bg='#E0D9EF')
+    WIN_top.title('Confirm Vote')
+    WIN_top.geometry('300x150')
+
+    #Made a list Contaning properties of font so can be called many times in program.
+    tfont_tup = ("Comic Sans MS", 15)
+
+
+    def no():
+        WIN_top.destroy()
+    
+    def yes():
+        WIN_top.destroy()
+        candidate_selected(name)
+        WIN.destroy()
+        from dashboard import dashboard as dashboard
+        dashboard()
+        
+
+
+    #Message to be Displayed at Toplevel
+    message = Label(WIN_top, bg='#E0D9EF', text=f"Confirm Your Vote \n to {name} ", font=tfont_tup, justify="center",
+                        foreground="#000000")
+    message.pack()
+
+
+    #No Button which when pressed calls no function
+    no_button = Button(WIN_top, bg='#FFFFFF', text=" OK  ", background='Red', foreground="Black", font=("Comic Sans MS", 12), command=yes)
+    no_button.place(x=80, y=80)
+    
+    yes_button = Button(WIN_top, bg='#FFFFFF', text="Cancel", background='Green', foreground="Black", font=("Comic Sans MS", 12), command=no)
+    yes_button.place(x=180, y=80)
+
+    #Places all GUI of Toplevel into it
+    WIN_top.mainloop()
+
+
 #Created a Function Named viewcandidate Which Stores all the Codes of viewcandidate Page
 # so it can be called later from another program
 def viewcandidate():
