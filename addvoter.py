@@ -10,6 +10,97 @@ import random
 import requests
 from stegano import lsb
 
+def addnewvoter_validation(name_entry, dob_entry, citizenship_entry, phone_entry, address_entry):
+    if len(name_entry.get()) != 0 and isinstance(name_entry.get(), str) and len(dob_entry.get()) != 0 and dob_entry.get().isdigit() and len(dob_entry.get()) == 4 and len(citizenship_entry.get()) != 0 and citizenship_entry.get().isdigit() and len(phone_entry.get()) == 10 and phone_entry.get().isdigit() and len(address_entry.get()) != 0 and isinstance(address_entry.get(), str):
+        image_path = "images/profileimg.png"
+        decoded_data = lsb.reveal(image_path)
+        decoded_data = json.loads(decoded_data)
+        
+        for i in decoded_data["Voter"]:
+            if i[2] == citizenship_entry.get():
+                title = "Error"
+                message = "Citizenship Number \n Already Exists"
+                from errors import error as show_error
+                show_error(title,message)
+                return False
+        
+        return True
+    else:
+        return False
+
+
+
+def create_new_voter(WIN,name_entry, dob_entry, citizenship_entry, phone_entry, address_entry):
+    # Get the data from the user entries
+    name = name_entry.get()
+    age = dob_entry.get()
+    citizenship = citizenship_entry.get()
+    phone = phone_entry.get()
+    address = address_entry.get()
+    code = random.randint(10000, 99999)
+    voted = False
+
+    if addnewvoter_validation(name_entry, dob_entry, citizenship_entry, phone_entry, address_entry):
+        # If data is valid, create a new voter dictionary
+        image_path = "images/profileimg.png"
+        decoded_data = lsb.reveal(image_path)
+        decoded_data = json.loads(decoded_data)
+        voting_system = decoded_data
+    
+        new_data = [name, age, citizenship, phone, address, code , voted]
+        voting_system["Voter"].append(new_data)
+        
+        phone = {'phoneNumber': '+977' + phone}
+        send(code,phone)
+        json_data = json.dumps(voting_system)
+        # Encode the JSON data into the image using least significant bit (LSB) method
+        encoded_image = lsb.hide(image_path, json_data)
+        # Save the output image
+        encoded_image.save(image_path)
+        confirm_voter(WIN)
+    else:
+        # If data is not valid, display an error message
+        title = "Error"
+        message = "Recheck Your Input\n Values"
+        from errors import error as show_error
+        show_error(title,message)
+
+def confirm_voter(WIN):
+    '''Created TopLevel as WIN_top,providing its geometry and title.'''
+    
+    WIN_top = Toplevel(bg='#E0D9EF')
+    WIN_top.title('Confirm Voter')
+    WIN_top.geometry('300x150')
+
+    #Made a list Contaning properties of font so can be called many times in program.
+    tfont_tup = ("Comic Sans MS", 15)
+
+
+    def no():
+        WIN_top.destroy()
+        WIN.destroy()  # Destroy the current page
+        from admin_login import homepage as admin_homepage
+        admin_homepage()
+
+
+    #Message to be Displayed at Toplevel
+    message = Label(WIN_top, bg='#E0D9EF', text="Name has been successfully \n added in the voter list!", font=tfont_tup, justify="center",
+                        foreground="#000000")
+    message.pack()
+
+
+    #No Button which when pressed calls no function
+    no_button = Button(WIN_top, bg='#FFFFFF', text=" OK  ", background='Red', foreground="Black", font=("Comic Sans MS", 12), command=no)
+    no_button.place(x=108, y=80)
+
+    #Places all GUI of Toplevel into it
+    WIN_top.mainloop()
+
+def return_adminhomepage(WIN):
+    WIN.destroy()
+    from admin_login import homepage as admin_homepage
+    admin_homepage()
+
 
 #Created a Function Named add_new_voter Which Stores all the Codes of add_new_voter Page
 # so it can be called later from another program
