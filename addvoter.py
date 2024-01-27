@@ -28,6 +28,21 @@ def addnewvoter_validation(name_entry, dob_entry, citizenship_entry, phone_entry
     else:
         return False
 
+def send(code,phone):
+    try:
+        to_phone = phone['phoneNumber']
+        # Call an api and send parameter to it
+        r = requests.get(
+            "http://api.sparrowsms.com/v2/sms/",
+            params={'token' : 'v2_Rri05e6U3XkCcnmjeOnfxdDzAqz.dY9a',
+                  'from'  : 'TheAlert',
+                  'to'    : to_phone,
+                  'text'  : f'Dear User,Please use {code} as your Voter ID.'})
+        status_code = r.status_code
+        response = r.text
+        response_json = r.json()
+    except Exception as e:
+        print(f"Error sending OTP: {str(e)}")
 
 
 def create_new_voter(WIN,name_entry, dob_entry, citizenship_entry, phone_entry, address_entry):
