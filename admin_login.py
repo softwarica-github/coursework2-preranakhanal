@@ -38,6 +38,24 @@ def homepage():
     #Made a list Contaning properties of font so can be called many times in program.
     tfont_tup = ("Comic Sans MS", 12)
 
+    # created a function named login_page
+    def add_voter_page():
+        '''Destroys the tkinter window and call open_login function i.e. login function from a login page'''
+        WIN.destroy()
+        from addvoter import add_new_voter
+        add_new_voter()
+        
+    def view_voter_page():
+        '''Destroys the tkinter window and call open_login function i.e. login function from a login page'''
+        WIN.destroy()
+        from viewvoter import viewvoter
+        viewvoter()
+    
+    def view_votes_page():
+        '''Destroys the tkinter window and call open_login function i.e. login function from a login page'''
+        WIN.destroy()
+        from viewvotes import viewvotes
+        viewvotes()
 
 
     #Created a Function named on_enter_add_voter with 'e' as one parameter
