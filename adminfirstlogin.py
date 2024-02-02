@@ -1,7 +1,27 @@
 #Imported Necessary Modules
 from tkinter import *
 
+# Created a function named adminlogin_validation
+def adminlogin_validation(username, password):
+    '''Checks Whether Username and Password Entry is Entered or not
+    and Returns True if Username and Password is entered or Flase if not.'''
+    return len(username) != 0 and username != "User Name" and len(password) != 0 and password != "Password"
 
+
+
+
+# Create a Function named adminlogin_validate
+def adminlogin_validate(WIN,username_value, password_value):
+    record = []  # Define the variable record
+
+    if adminlogin_validation(username_value, password_value):
+        if str(username_value) == "admin" and str(password_value) == "admin":  # Modify the condition
+            # Destroys the tkinter window and call open_profile function i.e. profile_view function from a profile page
+            WIN.destroy()
+            from admin_login import homepage as admin_homepage
+            admin_homepage()
+    else:
+        adminlogin_data_error()
 
 
 #Created a Function Named adminlogin Which Stores all the Codes of adminlogin Page
