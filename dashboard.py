@@ -20,7 +20,30 @@ def dashboard():
     tfont_tup = ("Comic Sans MS", 12)
 
     # created a function named admin_page
-  admin_login_button.config(background= '#eb5454', foreground= 'black')
+    def admin_page():
+        '''Destroys the tkinter window and call open function i.e. login function from a admin page'''
+        WIN.destroy()
+        from adminfirstlogin import adminlogin as adminlogin
+        adminlogin()
+
+    # created a function named voter_page
+    def voter_page():
+        '''Destroys the tkinter window and call open_register function i.e. register function from a register page'''
+        WIN.destroy()
+        from Login_as_voter import voterlogin as open_register
+        open_register()
+
+    #Created a Function named on_enter_admin_login with 'e' as one parameter
+    def on_enter_admin_login(e):
+        '''Changed Background and Foreground of Login Button named admin_login_button
+        to #ABBC41 and white respectively when function is called.'''
+        admin_login_button.config(background='#edd8ed',foreground= "red")
+
+    #Created a Function named on_leave_admin_login with 'e' as one parameter
+    def on_leave_admin_login(e):
+        '''Changed Background and Foreground of Login Button named admin_login_button to
+        pink and black respectively when function is called.'''
+        admin_login_button.config(background= '#eb5454', foreground= 'black')
 
     #created a Login Button which calls admin_page function when pressed
     admin_login_button = Button(WIN,text="Login as Admin",padx=13,borderwidth=0,font=tfont_tup,background= '#eb5454', foreground= 'black',command=admin_page)
