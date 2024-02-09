@@ -5,6 +5,25 @@ from PIL import Image
 from stegano import lsb
 
 #Created Function namedvoterlogin_error
+def voterlogin_data_error():
+    '''Store title for toplevel in title and message to be displayed at message and calls show_error function providing title and message'''
+    title = "Error"
+    message = "Recheck Your Input\n Values"
+    from errors import error as show_error
+    show_error(title,message)
+    
+ 
+
+def confirm_voter(WIN,voter_idtemp_voter_id):
+    record = []  # Define the variable record
+
+    if voterlogin_validation(voter_idtemp_voter_id):
+        # Destroys the tkinter window and call open_profile function i.e. profile_view function from a profile page
+        WIN.destroy()
+        from addvote import viewcandidate
+        viewcandidate()
+    else:
+        voterlogin_data_error()
 
 #Created a Function Named voterlogin Which Stores all the Codes of voterlogin Page
 # so it can be called later from another program
