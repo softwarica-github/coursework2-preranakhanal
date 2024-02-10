@@ -12,7 +12,31 @@ def voterlogin_data_error():
     from errors import error as show_error
     show_error(title,message)
     
- 
+def voterlogin_validation(voter_idtemp_voter_id):
+    image_path = "images/profileimg.png"
+    decoded_data = lsb.reveal(image_path)
+    decoded_data = json.loads(decoded_data)
+    
+    
+    voter_idtemp_voter_id = int(voter_idtemp_voter_id)
+    
+    for i in decoded_data["Voter"]:
+        if i[5] == voter_idtemp_voter_id and i[6] == True:
+            title = "Error"
+            message = "You have \n Already Voted"
+            from errors import error as show_error
+            show_error(title,message)
+            return False
+        elif i[5] == voter_idtemp_voter_id and i[6] == False:
+            i[6] = True
+            json_data = json.dumps(decoded_data)
+            encoded_image = lsb.hide(image_path, json_data)
+            # Save the output image
+            encoded_image.save(image_path)
+            return True
+    
+    return False
+    
 
 def confirm_voter(WIN,voter_idtemp_voter_id):
     record = []  # Define the variable record
