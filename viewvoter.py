@@ -8,6 +8,17 @@ import json
 
 
 
+def data_not_found():
+    '''Store title for toplevel in title and message to be displayed at message and calls show_error function providing title and message'''
+    title = "Username Not Found"
+    message = "Input Username was\n not Found"
+    from errors import error as show_error
+    show_error(title, message)
+    
+def return_adminhomepage(WIN):
+    WIN.destroy()
+    from admin_login import homepage as admin_homepage
+    admin_homepage()
 
 #Created a Function Named viewvoter Which Stores all the Codes of viewvoter Page
 # so it can be called later from another program
