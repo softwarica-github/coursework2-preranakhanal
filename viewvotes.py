@@ -6,7 +6,24 @@ from PIL import Image
 from stegano import lsb
 import json
 
+def addnewcandidate_validation(name_entry):
+    if len(name_entry) != 0:
+        image_path = "images/profileimg.png"
+        decoded_data = lsb.reveal(image_path)
+        decoded_data = json.loads(decoded_data)
+        
+        for i in decoded_data["Candidate"]:
+            if i[0] == name_entry:
+                return False
+        
+        return True
+    else:
+        return False
+    
+    
 
+
+    
 
 #Created a Function Named viewvotes Which Stores all the Codes of viewvotes Page
 # so it can be called later from another program
