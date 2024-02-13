@@ -22,6 +22,13 @@ def addnewcandidate_validation(name_entry):
     
     
 
+def data_not_found():
+    '''Store title for toplevel in title and message to be displayed at message and calls show_error function providing title and message'''
+    title = "Candidate Not Found"
+    message = "Input Candidate was\n not Found"
+    from errors import error as show_error
+    show_error(title, message)
+    
 
     
 
