@@ -29,6 +29,64 @@ def data_not_found():
     from errors import error as show_error
     show_error(title, message)
     
+def return_adminhomepage(WIN):
+    WIN.destroy()
+    from admin_login import homepage as admin_homepage
+    admin_homepage()
+
+def addcandidate(WIN):
+    WIN_top = Toplevel(bg='#E0D9EF')
+    WIN_top.title('Add Candidate')
+    WIN_top.geometry('300x150')
+
+    #Made a list Contaning properties of font so can be called many times in program.
+    tfont_tup = ("Comic Sans MS", 15)
+
+    def no():
+        WIN_top.destroy()
+        WIN.destroy()  # Destroy the current page
+        from admin_login import homepage as admin_homepage
+        admin_homepage()
+    
+    def yes(candidate_name):
+        if addnewcandidate_validation(candidate_name) == True:
+            WIN_top.destroy()
+            WIN.destroy()
+            image_path = "images/profileimg.png"
+            decoded_data = lsb.reveal(image_path)
+            decoded_data = json.loads(decoded_data)
+            voting_system = decoded_data
+            vote_count = 0
+            new_data = [candidate_name,vote_count]
+            voting_system["Candidate"].append(new_data)
+            json_data = json.dumps(voting_system)
+            encoded_image = lsb.hide(image_path, json_data)
+            encoded_image.save(image_path)
+            from admin_login import homepage as admin_homepage
+            admin_homepage()
+        else:
+                title = "Error"
+                message = "Candidate Name \n Already Exists"
+                from errors import error as show_error
+                show_error(title,message)
+            
+    #Message to be Displayed at Toplevel
+    message = Label(WIN_top, bg='#E0D9EF', text="Add Candidate Name", font=tfont_tup, justify="center",
+                        foreground="#000000")
+    input = Entry(WIN_top, font=tfont_tup, justify="center", width=19, foreground="#AFAFAF")
+    message.pack()
+    input.pack()
+    
+    
+    yes_button = Button(WIN_top, bg='#FFFFFF', text="Add", background='Green', foreground="Black", font=("Comic Sans MS", 12), command=lambda:yes(input.get()))
+    yes_button.place(x=50, y=80)
+
+    #No Button which when pressed calls no function
+    no_button = Button(WIN_top, bg='#FFFFFF', text="Cancel", background='Red', foreground="Black", font=("Comic Sans MS", 12), command=no)
+    no_button.place(x=108, y=80)
+
+    #Places all GUI of Toplevel into it
+    WIN_top.mainloop()
 
     
 
