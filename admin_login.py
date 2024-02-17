@@ -14,10 +14,6 @@ def dashboard_call(WIN):
 def homepage():
     #Created a Tkinter Window named WIN
     WIN = Tk()
-    #Placed Image as Iconphoto on Window
-    # logo_image = PhotoImage(file="images/fish2.png")
-    # WIN.iconphoto(False, logo_image)
-    #Named Tkinter Window
     WIN.title('Online Voting System')
     #Set size of Tkinter Window
     WIN.geometry('360x640')
@@ -25,15 +21,9 @@ def homepage():
     background = PhotoImage(file="images/background.png")
     label_background = Label(WIN,image=background,borderwidth=0)
     label_background.place(x=0,y=0)
-    
-    
-    
     button_image = PhotoImage(file="images/arrow.png")
-    
-
     button = Button(WIN, image=button_image, borderwidth=0, width=30, height=30,command = lambda:dashboard_call(WIN))
     button.place(x=4, y=5)
-
 
     #Made a list Contaning properties of font so can be called many times in program.
     tfont_tup = ("Comic Sans MS", 12)

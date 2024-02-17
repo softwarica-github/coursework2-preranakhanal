@@ -120,11 +120,8 @@ def return_adminhomepage(WIN):
 #Created a Function Named add_new_voter Which Stores all the Codes of add_new_voter Page
 # so it can be called later from another program
 def add_new_voter():
-    '''Created a Tkinter Window named WIN and placed logo_image as icon photo.
-    Similarly,Adding Title to the window and Providing Geaometry to the window.'''
+    '''Similarly,Adding Title to the window and Providing Geaometry to the window.'''
     WIN = Tk()
-    logo_image = PhotoImage(file="images/logo.png")
-    WIN.iconphoto(False, logo_image)
     WIN.title('Online Voting System')
     WIN.geometry('360x640')
 

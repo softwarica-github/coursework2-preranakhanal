@@ -19,8 +19,6 @@ def addnewcandidate_validation(name_entry):
         return True
     else:
         return False
-    
-    
 
 def data_not_found():
     '''Store title for toplevel in title and message to be displayed at message and calls show_error function providing title and message'''
@@ -88,8 +86,6 @@ def addcandidate(WIN):
     #Places all GUI of Toplevel into it
     WIN_top.mainloop()
 
-    
-
 #Created a Function Named viewvotes Which Stores all the Codes of viewvotes Page
 # so it can be called later from another program
 def viewvotes():
@@ -111,8 +107,6 @@ def viewvotes():
     w.create_rectangle(0, 0, 320, 600, fill="#edd09f", outline='#edd09f')
     w.pack(padx=(20,20), pady=(20,20))
 
-
-
     #List contaning properties of font
     tfont_tup = ("Comic Sans MS", 12)
 
@@ -125,8 +119,7 @@ def viewvotes():
     tv['columns']=('Name', 'Vote')
     tv.column('#0', width=0, stretch=NO)
     tv.column('Name', anchor=W, width=140)
-    tv.column('Vote', anchor=E, width=98)
-    
+    tv.column('Vote', anchor=E, width=98)    
     
     image_path = "images/profileimg.png"
     decoded_data = lsb.reveal(image_path)
@@ -171,8 +164,6 @@ def viewvotes():
     viewvotes_label = Label(WIN_viewvotes, text="candidate List", font=tfont_top, justify="center", background="#ebac3f", foreground="black")
     viewvotes_label.place(x=133, y=20)
 
-
-
     #function named Search
     def search():
         try:
@@ -206,8 +197,6 @@ def viewvotes():
         except:
             #Calls data_not_foound
             data_not_found()
-
-
 
     #Place to Enter Username to search for
     username_search = Entry(WIN_viewvotes, font=tfont_tup, justify="center", width=19, foreground="#AFAFAF")
