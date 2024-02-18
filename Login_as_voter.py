@@ -54,10 +54,6 @@ def confirm_voter(WIN,voter_idtemp_voter_id):
 def voterlogin():
     # Created a Tkinter Window named WIN
     WIN = Tk()
-    # Placed Image as Iconphoto on Window
-    logo_image = PhotoImage(file="images/fish2.png")
-    WIN.iconphoto(False, logo_image)
-    #Named Tkinter Window
     WIN.title('Online Voting System')
     #Set size of Tkinter Window
     WIN.geometry('360x640')
@@ -112,25 +108,12 @@ def voterlogin():
     voterlogin_button = Button(WIN, font=tfont_tup, justify="center", width=10, borderwidth=0, text="Next", bg="#d98d0b",command=lambda : confirm_voter(WIN,voter_idtemp_voter_id_entry.get()))
     voterlogin_button.place(x=110, y=370)
 
-
-    
-
-
     #Created a Bind i.e. When Entered inside a Register button calls on_enter_voter_voterlogin function
     #and when leaves the Register button calls on_leave_voter_voterlogin function
     voterlogin_button.bind('<Enter>',on_enter_voterlogin_button)
     voterlogin_button.bind('<Leave>',on_leave_voterlogin_button)
 
-
     #Updates GUI Into TKinter Window
     WIN.mainloop()
-
-
-
-
-    
-
-
-
 #calls voterlogin function
 voterlogin()

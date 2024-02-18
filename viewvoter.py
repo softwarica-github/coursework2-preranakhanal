@@ -6,8 +6,6 @@ from PIL import Image
 from stegano import lsb
 import json
 
-
-
 def data_not_found():
     '''Store title for toplevel in title and message to be displayed at message and calls show_error function providing title and message'''
     title = "Username Not Found"
@@ -26,8 +24,6 @@ def viewvoter():
     '''Created a Tkinter Window named WIN_viewvoter and placed logo_image as icon photo.
     Similarly,Adding Title to the window and Providing Geometry to the window.'''
     WIN_viewvoter = Tk()
-    logo_image = PhotoImage(file="images/fish2.png")
-    WIN_viewvoter.iconphoto(False, logo_image)
     WIN_viewvoter.title('Online Voting System')
     WIN_viewvoter.geometry('360x640')
 
@@ -40,8 +36,6 @@ def viewvoter():
     #Created a Rectangle in a Canvas with width and height of 240 and 400
     w.create_rectangle(0, 0, 320, 600, fill="#edd09f", outline='#edd09f')
     w.pack(padx=(20,20), pady=(20,20))
-
-
 
     #List contaning properties of font
     tfont_tup = ("Comic Sans MS", 12)
@@ -56,7 +50,6 @@ def viewvoter():
     tv.column('#0', width=0, stretch=NO)
     tv.column('Name', anchor=W, width=140)
     tv.column('Age', anchor=E, width=98)
-    
     
     image_path = "images/profileimg.png"
     decoded_data = lsb.reveal(image_path)
@@ -100,8 +93,6 @@ def viewvoter():
     # Created a text named viewvoter
     viewvoter_label = Label(WIN_viewvoter, text="Voter List", font=tfont_top, justify="center", background="#ebac3f", foreground="black")
     viewvoter_label.place(x=133, y=20)
-
-
 
     #function named Search
     def search():

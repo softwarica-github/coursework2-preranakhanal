@@ -7,15 +7,23 @@ def adminlogin_validation(username, password):
     and Returns True if Username and Password is entered or Flase if not.'''
     return len(username) != 0 and username != "User Name" and len(password) != 0 and password != "Password"
 
-
+#Created Function namedadminlogin_error
+def adminlogin_data_error():
+    '''Store title for toplevel in title and message to be displayed at message and calls show_error function providing title and message'''
+    title = "Error"
+    message = "Recheck Your Input\n Values"
+    from errors import error as show_error
+    show_error(title,message)
+    
+def dashboard_call(WIN):
+    '''Destroys the tkinter window and call open function i.e. login function from a admin page'''
 
 
 # Create a Function named adminlogin_validate
 def adminlogin_validate(WIN,username_value, password_value):
     record = []  # Define the variable record
-
     if adminlogin_validation(username_value, password_value):
-        if str(username_value) == "admin" and str(password_value) == "admin":  # Modify the condition
+        if str(username_value) == "admin" and str(password_value) == "admin":  
             # Destroys the tkinter window and call open_profile function i.e. profile_view function from a profile page
             WIN.destroy()
             from admin_login import homepage as admin_homepage
@@ -23,22 +31,15 @@ def adminlogin_validate(WIN,username_value, password_value):
     else:
         adminlogin_data_error()
 
-
 #Created a Function Named adminlogin Which Stores all the Codes of adminlogin Page
 # so it can be called later from another program
 def adminlogin():
     # Created a Tkinter Window named WIN
     WIN = Tk()
-    # Placed Image as Iconphoto on Window
-    # logo_image = PhotoImage(file="images/fish2.png")
-    # WIN.iconphoto(False, logo_image)
-    #Named Tkinter Window
     WIN.title('Online Voting System')
     #Set size of Tkinter Window
     WIN.geometry('360x640')
     
-
-
     #Made a list Contaning properties of font so can be called many times in program.
     tfont_tup = ("Comic Sans MS", 15)
     # Placed backround.png image as BAckground to a TKinter Window
@@ -52,8 +53,6 @@ def adminlogin():
     w.pack(padx=50, pady=(230,0))
     
     button_image = PhotoImage(file="images/arrow.png")
-    
-
     button = Button(WIN, image=button_image, borderwidth=0, width=30, height=30,command = lambda:dashboard_call(WIN))
     button.place(x=4, y=5)
 
@@ -86,7 +85,6 @@ def adminlogin():
     adminlogin_button = Button(WIN, font=tfont_tup, justify="center", width=10, borderwidth=0, text="Log In", bg="#d98d0b",command=lambda : adminlogin_validate(WIN,username_entry.get(),password_entry.get()))
     adminlogin_button.place(x=110, y=410)
 
-
      # Created a Function named on_enter_register_button with 'e' as one parameter
     def on_enter_adminlogin_button(e):
         '''Changed Background and Foreground of Register Button named register_button
@@ -101,11 +99,7 @@ def adminlogin():
 
     adminlogin_button.bind('<Enter>',on_enter_adminlogin_button)
     adminlogin_button.bind('<Leave>',on_leave_adminlogin_button)
-
-  
-
-  
-
+    
     #Updates GUI Into TKinter Window
     WIN.mainloop()
 
